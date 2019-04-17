@@ -22,11 +22,9 @@
         
         <!--The post item-->
         <DataTemplate x:Name="PostTemplate" x:DataType="models:PostModel">
-            <StackPanel Orientation="Horizontal" Margin="6">
-                <TextBlock Text="{x:Bind Title}"></TextBlock>
-                <TextBlock Text="{x:Bind Body}"></TextBlock>
-                <TextBlock Text="{x:Bind Link}"></TextBlock>
-                <TextBlock Text="{x:Bind UserName}"></TextBlock>
+            <StackPanel Margin="6">
+                <TextBlock Text="{x:Bind Title}" FontWeight="Bold"></TextBlock>
+                <TextBlock Text="{x:Bind UserName}" FontStyle="Italic"></TextBlock>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
