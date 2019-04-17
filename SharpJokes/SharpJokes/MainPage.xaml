@@ -1,0 +1,95 @@
+﻿<Page
+    x:Class="SharpJokes.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharpJokes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <!--<Page.DataContext>
+        <viewmodels:PostsViewModel/>
+    </Page.DataContext>-->
+
+    <Page.Resources>
+        <!--The list of posts data-->
+        <CollectionViewSource x:Name="PostCollection">
+            <!--Source="{x:Bind NDViewModel.Notes}"-->
+        </CollectionViewSource>
+        
+        <!--The post item-->
+        <DataTemplate x:Name="PostTemplate">
+            <StackPanel Orientation="Horizontal" Margin="6">
+                <TextBlock Text="Post Title"></TextBlock>
+                <TextBlock Text="/u/Username"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <!--Main Command Bar-->
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="About" Label="About"></AppBarButton>
+                <AppBarButton x:Name="Exit" Label="Exit"></AppBarButton>
+            </CommandBar.SecondaryCommands>
+
+            <AppBarButton Icon="OutlineStar" Label="Favorite Post" ToolTipService.ToolTip="Favorite Post"></AppBarButton>
+            <AppBarButton Icon="List" Label="View Favorites" ToolTipService.ToolTip="View Favorites"></AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Side Panel-->
+        <StackPanel Grid.Row="0" Grid.Column="0" Background="{StaticResource SystemControlBaseMediumLowAcrylicWindowMediumBrush}">
+            <!--Search Bar-->
+            <TextBox ToolTipService.ToolTip="Search for a Post" x:Name="FilterTextbox" PlaceholderText="Search.." FontSize="20" Margin="20,20,20,20"/>
+
+            <!--Filter presets-->
+            <StackPanel Orientation="Horizontal" Margin="20,0,20,20" HorizontalAlignment="Center">
+                <AppBarButton x:Name="Top" Icon="Favorite" Label="Top"></AppBarButton>
+                <AppBarButton x:Name="Popular" Icon="Favorite" Label="Popular"></AppBarButton>
+                <AppBarButton x:Name="New"  Icon="Favorite" Label="New"></AppBarButton>
+            </StackPanel>
+
+            <!--List of Notes-->
+            <ScrollViewer>
+                <ListView ToolTipService.ToolTip="Posts" VerticalAlignment="Top" Margin="20,20,20,20"
+                    ItemsSource="{Binding Source={StaticResource PostCollection}}"
+                    ItemTemplate="{Binding Source={StaticResource PostTemplate}}">
+                    <!--SelectedItem="{x:Bind NDViewModel.SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+                </ListView>
+            </ScrollViewer>
+        </StackPanel>
+
+        <!--Post Section-->
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/> <!--Image-->
+                <RowDefinition Height="auto"/> <!--Title-->
+                <RowDefinition Height="auto"/> <!--User-->
+                <RowDefinition Height="auto"/> <!--Post Body-->
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Row="0" Grid.Column="0" Margin="20,20,20,20"></Image>
+            <TextBlock Grid.Row="1" Grid.Column="0" FontWeight="Bold" Text="Title" Margin="20,20,20,20"></TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" FontStyle="Italic" Text="/u/Username" Margin="20,0,20,20"></TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" Margin="20,0,20,20" 
+                       Text="Body body body body rockin every where, body body body body rockin everywhere, rockin everywhere"></TextBlock>
+        </Grid>
+
+    </Grid>
+</Page>
