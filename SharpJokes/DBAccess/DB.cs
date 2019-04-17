@@ -9,6 +9,9 @@ namespace DBAccess
 {
     public class DB
     {
+        /// <summary>
+        /// Initialize the database.
+        /// </summary>
         public static void InitializeDatabase()
         {
             using (var db = new SqliteConnection("Filename=SharpJokes.db"))
@@ -20,26 +23,52 @@ namespace DBAccess
                         "favorite_title nvarchar(255) NOT NULL DEFAULT('untitled'), " +
                         "favorite_text nvarchar(255) " +
                         "favorite_link nvarchar(255) " +
+                        "favorite_username nvarchar(255) " +
                     ");";
                 new SqliteCommand(createTable, db).ExecuteReader();
             }
         }
 
-        public static void AddFavorite(object favorite)
+        /// <summary>
+        /// Add a favorite to the database
+        /// </summary>
+        /// <param name="id">Post ID of the favorite</param>
+        /// <param name="title">Title of the favorite</param>
+        /// <param name="body">Body of the favorite</param>
+        /// <param name="link">Link of the favorite</param>
+        /// <param name="username">Username that posted the favorite</param>
+        public static void AddFavorite(int id, string title, string body, string link, string username)
         {
+            string insertCommandText;
+            if (string.IsNullOrEmpty(link))
+            {
+                insertCommandText = "INSERT INTO Favorites (favorite_id, favorite_title, " +
+                    "favorite_text, favorite_username) " +
+                    "VALUES (" + id + ", \"" + title + "\", \"" + body + "\", \"" + username + "\");";
+            } else
+            {
+                insertCommandText = "INSERT INTO Favorites (favorite_id, favorite_title, " +
+                    "favorite_link, favorite_username) " +
+                    "VALUES (" + id + ", \"" + title + "\", \"" + link + "\", \"" + username + "\");";
+            }
+
             using (var db = new SqliteConnection("Filename=SharpJokes.db"))
             {
                 db.Open();
                 var insertCommand = new SqliteCommand
                 {
                     Connection = db,
-                    CommandText = ""
+                    CommandText = insertCommandText
                 };
                 insertCommand.ExecuteReaderAsync();
             }
         }
 
-        public static void DeleteFavorite(object favorite)
+        /// <summary>
+        /// Delete a favorite from the database
+        /// </summary>
+        /// <param name="postId">Post ID of the favorite to delete</param>
+        public static void DeleteFavorite(int postId)
         {
             using (var db = new SqliteConnection("Filename=SharpJokes.db"))
             {
@@ -47,13 +76,17 @@ namespace DBAccess
                 var deleteCommand = new SqliteCommand
                 {
                     Connection = db,
-                    CommandText = ""
+                    CommandText = "DELETE FROM Favorites WHERE favorite_id = " + postId + ";"
                 };
                 deleteCommand.ExecuteReaderAsync();
             }
         }
 
-        public static void GetFavorites()
+        /// <summary>
+        /// Get the favorites from the database
+        /// </summary>
+        /// <returns>List of favorites (represented by string arrays)</returns>
+        public static List<string[]> GetFavorites()
         {
             using (var db = new SqliteConnection("Filename=SharpJokes.db"))
             {
@@ -64,12 +97,20 @@ namespace DBAccess
                     CommandText = "SELECT * FROM Favorites;"
                 };
                 var result = selectAllCommand.ExecuteReader();
-                List<object> favorites = new List<object>();
+                List<string[]> favorites = new List<string[]>();
                 do
                 {
-                    // add results to favorites list
+                    var favorite = new string[result.FieldCount];
+                    for (var i = 0; i < result.FieldCount; i++)
+                    {
+                        if (i == 0) favorite[i] = result.GetInt32(i).ToString();
+                        else favorite[i] = result.GetString(i);
+                    }
+                    favorites.Add(favorite);
                 }
                 while (result.Read());
+
+                return favorites;
             }
         }
 

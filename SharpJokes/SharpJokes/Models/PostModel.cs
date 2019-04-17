@@ -14,6 +14,14 @@ namespace SharpJokes.Models
         public string UserName { get; set; }
         public int PostId { get; set; }
 
+        /// <summary>
+        /// Constructor with Properterties
+        /// </summary>
+        /// <param name="title">Title of the post</param>
+        /// <param name="body">Body of a text post</param>
+        /// <param name="link">Link of a link post</param>
+        /// <param name="username">Username of poster</param>
+        /// <param name="postID">Post ID</param>
         public PostModel(string title, string body, string link, string username, int postID)
         {
             Title = title;
@@ -22,6 +30,11 @@ namespace SharpJokes.Models
             UserName = username;
             PostId = postID;
         }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public PostModel() { }
     }
 
 }
