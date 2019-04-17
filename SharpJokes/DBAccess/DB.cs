@@ -25,7 +25,7 @@ namespace DBAccess
             }
         }
 
-        public static void AddFavorite(Object favorite)
+        public static void AddFavorite(object favorite)
         {
             using (var db = new SqliteConnection("Filename=SharpJokes.db"))
             {
@@ -50,6 +50,26 @@ namespace DBAccess
                     CommandText = ""
                 };
                 deleteCommand.ExecuteReaderAsync();
+            }
+        }
+
+        public static void GetFavorites()
+        {
+            using (var db = new SqliteConnection("Filename=SharpJokes.db"))
+            {
+                db.Open();
+                var selectAllCommand = new SqliteCommand
+                {
+                    Connection = db,
+                    CommandText = "SELECT * FROM Favorites;"
+                };
+                var result = selectAllCommand.ExecuteReader();
+                List<object> favorites = new List<object>();
+                do
+                {
+                    // add results to favorites list
+                }
+                while (result.Read());
             }
         }
 
