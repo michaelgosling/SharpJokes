@@ -22,9 +22,11 @@ namespace SharpJokes
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public ViewModels.PostViewModel PViewModel { get; set; }
         public MainPage()
         {
             this.InitializeComponent();
+            this.PViewModel = new ViewModels.PostViewModel();
         }
     }
 }
