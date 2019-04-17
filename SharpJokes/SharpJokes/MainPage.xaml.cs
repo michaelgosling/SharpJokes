@@ -28,5 +28,17 @@ namespace SharpJokes
             this.InitializeComponent();
             this.PViewModel = new ViewModels.PostViewModel();
         }
+
+        private void About_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(AboutPage));
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e) {
+            Application.Current.Exit();
+        }
+
+        private void ViewFavorites_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(FavoritesPage));
+        }
     }
 }
