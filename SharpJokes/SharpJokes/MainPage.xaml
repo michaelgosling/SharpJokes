@@ -33,8 +33,8 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:Name="About" Label="About"></AppBarButton>
-                <AppBarButton x:Name="Exit" Label="Exit"></AppBarButton>
+                <AppBarButton x:Name="About" Label="About" Click="About_Click"></AppBarButton>
+                <AppBarButton x:Name="Exit" Label="Exit" Click="Exit_Click"></AppBarButton>
             </CommandBar.SecondaryCommands>
 
             <AppBarButton Icon="OutlineStar" Label="Favorite Post" ToolTipService.ToolTip="Favorite Post"></AppBarButton>
