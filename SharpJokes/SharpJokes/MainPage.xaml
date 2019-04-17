@@ -38,7 +38,7 @@
             </CommandBar.SecondaryCommands>
 
             <AppBarButton Icon="OutlineStar" Label="Favorite Post" ToolTipService.ToolTip="Favorite Post"></AppBarButton>
-            <AppBarButton Icon="List" Label="View Favorites" ToolTipService.ToolTip="View Favorites"></AppBarButton>
+            <AppBarButton x:Name="ViewFavorites" Icon="List" Label="View Favorites" ToolTipService.ToolTip="View Favorites" Click="ViewFavorites_Click"></AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
 

@@ -36,5 +36,9 @@ namespace SharpJokes
         private void Exit_Click(object sender, RoutedEventArgs e) {
             Application.Current.Exit();
         }
+
+        private void ViewFavorites_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(FavoritesPage));
+        }
     }
 }

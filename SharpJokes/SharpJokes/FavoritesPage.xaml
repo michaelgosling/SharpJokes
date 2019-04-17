@@ -5,10 +5,47 @@
     xmlns:local="using:SharpJokes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:SharpJokes.Models"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Page.Resources>
+        <!--The list of posts data-->
+        <CollectionViewSource x:Name="FavoriteCollection">
+        </CollectionViewSource>
 
+        <!--The post item-->
+        <DataTemplate x:Name="FavoriteTemplate" x:DataType="models:PostModel">
+            <StackPanel Margin="5,5,5,5">
+                <TextBlock Text="{x:Bind Title}" FontWeight="Bold"></TextBlock>
+                <TextBlock Text="{x:Bind UserName}" FontStyle="Italic"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource SystemControlBaseMediumLowAcrylicWindowMediumBrush}">
+        <StackPanel>
+            <TextBlock Margin="50,50, 50, 0" Text="Favorites" FontWeight="ExtraBold" FontSize="50"></TextBlock>
+            <!--List of Notes-->
+            <ScrollViewer>
+                <GridView ToolTipService.ToolTip="Favorites" VerticalAlignment="Top" HorizontalAlignment="Center"
+                    ItemsSource="{Binding Source={StaticResource FavoriteCollection}}"
+                    ItemTemplate="{Binding Source={StaticResource FavoriteTemplate}}">
+                    <!--SelectedItem="{x:Bind NDViewModel.SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+                </GridView>
+            </ScrollViewer>
+        </StackPanel>
     </Grid>
+    
+    <!--Main Command Bar-->
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="Exit" Label="Exit" Click="Exit_Click"></AppBarButton>
+            </CommandBar.SecondaryCommands>
+
+            <AppBarButton x:Name="DeleteFavorite" Icon="Delete" Label="Delete Favorite" ToolTipService.ToolTip="Delete Favorite"></AppBarButton>
+            <AppBarButton x:Name="Back" Icon="Back" Label="Back to App" ToolTipService.ToolTip="Back to App" Click="Back_Click"></AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

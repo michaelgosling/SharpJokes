@@ -23,5 +23,13 @@ namespace SharpJokes {
         public FavoritesPage() {
             this.InitializeComponent();
         }
+
+        private void Exit_Click(object sender, RoutedEventArgs e) {
+            Application.Current.Exit();
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e) {
+            this.Frame.Navigate(typeof(MainPage));
+        }
     }
 }
