@@ -3,26 +3,30 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SharpJokes"
+    xmlns:models="using:SharpJokes.Models"
+    xmlns:viewmodels="using:SharpJokes.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <!--<Page.DataContext>
-        <viewmodels:PostsViewModel/>
-    </Page.DataContext>-->
+    <Page.DataContext>
+        <viewmodels:PostViewModel/>
+    </Page.DataContext>
 
     <Page.Resources>
         <!--The list of posts data-->
-        <CollectionViewSource x:Name="PostCollection">
+        <CollectionViewSource x:Name="PostCollection" Source="{x:Bind PViewModel.Posts}">
             <!--Source="{x:Bind NDViewModel.Notes}"-->
         </CollectionViewSource>
         
         <!--The post item-->
-        <DataTemplate x:Name="PostTemplate">
+        <DataTemplate x:Name="PostTemplate" x:DataType="models:PostModel">
             <StackPanel Orientation="Horizontal" Margin="6">
-                <TextBlock Text="Post Title"></TextBlock>
-                <TextBlock Text="/u/Username"></TextBlock>
+                <TextBlock Text="{x:Bind Title}"></TextBlock>
+                <TextBlock Text="{x:Bind Body}"></TextBlock>
+                <TextBlock Text="{x:Bind Link}"></TextBlock>
+                <TextBlock Text="{x:Bind UserName}"></TextBlock>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
