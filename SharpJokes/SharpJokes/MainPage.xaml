@@ -87,10 +87,15 @@
             </Grid.ColumnDefinitions>
 
             <Image Grid.Row="0" Grid.Column="0" Margin="20,20,20,20"></Image>
-            <TextBlock Grid.Row="1" Grid.Column="0" FontWeight="Bold" Text="Title" Margin="20,20,20,20"></TextBlock>
+            
+            <!--<TextBlock Grid.Row="1" Grid.Column="0" FontWeight="Bold" Text="Title" Margin="20,20,20,20"></TextBlock>
             <TextBlock Grid.Row="2" Grid.Column="0" FontStyle="Italic" Text="/u/Username" Margin="20,0,20,20"></TextBlock>
             <TextBlock Grid.Row="3" Grid.Column="0" Margin="20,0,20,20" 
-                       Text="Body body body body rockin every where, body body body body rockin everywhere, rockin everywhere"></TextBlock>
+                       Text="Body body body body rockin every where, body body body body rockin everywhere, rockin everywhere"></TextBlock>-->
+            <ItemsControl Grid.Row="1" Grid.Column="1"
+                      ItemsSource="{Binding Source={StaticResource PostCollection}, Mode=TwoWay}"
+                      ItemTemplate="{Binding Source={StaticResource PostTemplate}}"
+                     ></ItemsControl>
         </Grid>
 
     </Grid>
