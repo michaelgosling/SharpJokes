@@ -17,7 +17,6 @@
     <Page.Resources>
         <!--The list of posts data-->
         <CollectionViewSource x:Name="PostCollection" Source="{x:Bind PViewModel.Posts}">
-            <!--Source="{x:Bind NDViewModel.Notes}"-->
         </CollectionViewSource>
         
         <!--The post item-->
@@ -67,8 +66,8 @@
             <ScrollViewer>
                 <ListView ToolTipService.ToolTip="Posts" VerticalAlignment="Top" Margin="20,20,20,20"
                     ItemsSource="{Binding Source={StaticResource PostCollection}}"
-                    ItemTemplate="{Binding Source={StaticResource PostTemplate}}">
-                    <!--SelectedItem="{x:Bind NDViewModel.SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+                    ItemTemplate="{Binding Source={StaticResource PostTemplate}}"
+                    SelectedItem="{x:Bind PViewModel.SelectedPost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 </ListView>
             </ScrollViewer>
         </StackPanel>
@@ -86,11 +85,11 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Row="0" Grid.Column="0" Margin="20,20,20,20"></Image>
-            <TextBlock Grid.Row="1" Grid.Column="0" FontWeight="Bold" Text="Title" Margin="20,20,20,20"></TextBlock>
-            <TextBlock Grid.Row="2" Grid.Column="0" FontStyle="Italic" Text="/u/Username" Margin="20,0,20,20"></TextBlock>
-            <TextBlock Grid.Row="3" Grid.Column="0" Margin="20,0,20,20" 
-                       Text="Body body body body rockin every where, body body body body rockin everywhere, rockin everywhere"></TextBlock>
+            <Image Name="CurrentPostImage" Grid.Row="0" Grid.Column="0" Margin="20,20,20,20"></Image>
+            <TextBlock Name="CurrentPostTitle" Grid.Row="1" Grid.Column="0" FontWeight="Bold" Text="{x:Bind PLACEHOLDER.Title}" Margin="20,20,20,20"></TextBlock>
+            <TextBlock Name="CurrentPostUser" Grid.Row="2" Grid.Column="0" FontStyle="Italic" Text="{x:Bind PLACEHOLDER.User}" Margin="20,0,20,20"></TextBlock>
+            <TextBlock Name="CurrentPostBody" Grid.Row="3" Grid.Column="0" Margin="20,0,20,20" 
+                       Text="{x:Bind PLACEHOLDER.Body}"></TextBlock>
         </Grid>
 
     </Grid>
