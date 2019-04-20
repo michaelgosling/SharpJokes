@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="SharpJokes.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SharpJokes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel Margin="50,100,0,0">
+            <TextBlock Text="About Programmer Humor" FontWeight="ExtraBold" FontSize="50"></TextBlock>
+            <TextBlock Margin="0,20,0,0" Text="NAMES HERE" FontSize="24"></TextBlock>
+            <TextBlock Margin="0,20,20,0" Text="Paragraph here" FontSize="24" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+    </Grid>
+
+    <!--Main Command Bar-->
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="Exit" Label="Exit" Click="Exit_Click"></AppBarButton>
+            </CommandBar.SecondaryCommands>
+
+            <AppBarButton x:Name="GoToReddit" Icon="Link" Label="Go to Reddit" ToolTipService.ToolTip="Go to Reddit" Click="GoToReddit_Click"></AppBarButton>
+            <AppBarButton x:Name="Back" Icon="Back" Label="Back to App" ToolTipService.ToolTip="Back to App" Click="Back_Click"></AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>

@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using DBAccess;
 
 namespace SharpJokes
 {
@@ -30,6 +31,8 @@ namespace SharpJokes
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            DB.InitializeDatabase();
         }
 
         /// <summary>
