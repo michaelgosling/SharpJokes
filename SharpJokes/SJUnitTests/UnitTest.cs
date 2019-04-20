@@ -1,6 +1,7 @@
 ﻿
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SharpJokes.Models;
 
 namespace SJUnitTests
 {
@@ -8,8 +9,23 @@ namespace SJUnitTests
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void CreatePostModel_WithNullLink_NoException()
         {
+            try
+            {
+                PostModel post = new PostModel()
+                {
+                    PostId = -1,
+                    Title = "Test",
+                    Body = "Test body",
+                    Link = null,
+                    UserName = "Test User"
+                };
+            } catch (Exception e)
+            {
+                Assert.Fail();
+            }
+               
         }
     }
 }
