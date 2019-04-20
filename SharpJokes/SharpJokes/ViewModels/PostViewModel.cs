@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpJokes.Models;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace SharpJokes.ViewModels
 {
@@ -34,6 +37,7 @@ namespace SharpJokes.ViewModels
         public string PostUserName { get; set; }
         public int PostId { get; set; }
         public string PostLink { get; set; }
+        public BitmapImage PostImg = null;
 
 
         // Selected Post field/property
@@ -53,12 +57,20 @@ namespace SharpJokes.ViewModels
                 PostId = value == null ? -1 : value.PostId;
                 PostLink = value == null ? "" : value.Link ?? "";
 
+                // try to set the image of the post if there is one
+                try {
+                    PostImg = new BitmapImage(new Uri(value.Link, UriKind.Absolute));
+                }
+                catch (Exception e) { PostImg = null; };
+
                 // Fire off PropertyChange events
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PostTitle"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PostBody"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PostUserName"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PostId"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PostLink"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("_selectedPost"));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PostImg"));
             }
         }
 
@@ -87,7 +99,7 @@ namespace SharpJokes.ViewModels
             // some dummy data
             for (var i = 0; i < 10; i++)
             {
-                _allPosts.Add(new PostModel("Test" + i, "Test Body" + i, null, "TestUser " + i, i));
+                _allPosts.Add(new PostModel("Test" + i, "Test Body" + i, "https://i.redd.it/zo0c94gz6et21.png", "TestUser " + i, i));
             }
 
             // clone dummy data into observable collection
@@ -100,15 +112,37 @@ namespace SharpJokes.ViewModels
         /// </summary>
         private void PerformFiltering()
         {
-            if (_filter == null) _filter = ""; // null should be empty
-            var lowerCaseFilter = Filter.ToLowerInvariant().Trim(); // lowercase it and trim it
-            var result = _allPosts.Where(n => n.Title.ToLowerInvariant()
-                .Contains(lowerCaseFilter)).ToList(); // compare lowercase filter with all Posts
-            var toRemove = Posts.Except(result).ToList(); // get all the Posts that don't match the result
-            foreach (var x in toRemove) _allPosts.Remove(x); // remove Posts that don't match from observable collection
-            for (var i = 0; i < result.Count; i++)
-                if (i + 1 > Posts.Count || !Posts[i].Equals(result[i]))
-                    Posts.Insert(i, result[i]); // add items back in their correct order
+            if (_filter == null) {
+                _filter = "";
+            }
+
+            //If _filter has a value (ie. user entered something in Filter textbox)
+            //Lower-case and trim string
+            var lowerCaseFilter = Filter.ToLowerInvariant().Trim();
+
+            //Use LINQ query to get all note names that match filter text, as a list
+            var result =
+                _allPosts.Where(d => d.Title.ToLowerInvariant()
+                .Contains(lowerCaseFilter))
+                .ToList();
+
+            //Get list of values in current filtered list that we want to remove
+            //(ie. don't meet new filter criteria)
+            var toRemove = Posts.Except(result).ToList();
+
+            //Loop to remove items that fail filter
+            foreach (var x in toRemove) {
+                Posts.Remove(x);
+            }
+
+            var resultCount = result.Count;
+            // Add back in correct order.
+            for (int i = 0; i < resultCount; i++) {
+                var resultItem = result[i];
+                if (i + 1 > Posts.Count || !Posts[i].Equals(resultItem)) {
+                    Posts.Insert(i, resultItem);
+                }
+            }
         }
 
 

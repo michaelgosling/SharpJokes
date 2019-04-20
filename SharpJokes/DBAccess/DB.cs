@@ -21,8 +21,8 @@ namespace DBAccess
                     "CREATE TABLE IF NOT EXISTS Favorites ( " +
                         "favorite_id integer PRIMARY KEY, " +
                         "favorite_title nvarchar(255) NOT NULL DEFAULT('untitled'), " +
-                        "favorite_text nvarchar(255) " +
-                        "favorite_link nvarchar(255) " +
+                        "favorite_text nvarchar(255), " +
+                        "favorite_link nvarchar(255), " +
                         "favorite_username nvarchar(255) " +
                     ");";
                 new SqliteCommand(createTable, db).ExecuteReader();
