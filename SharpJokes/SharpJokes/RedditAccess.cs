@@ -40,14 +40,34 @@ namespace SharpJokes
                     break;
             }
 
+            // clear the posts list
             Posts.Clear();
 
+            // for each post, create a PostModel and add it to the Posts property
             foreach (var post in posts)
             {
-                
+                var body = "";
+                var link = "";
+                if (post.Listing.IsSelf)
+                {
+                    link = null;
+                    body = post.Listing.SelfText;
+                } else
+                {
+                    link = post.Listing.URL;
+                    body = null;
+                }
+                var cPost = new PostModel()
+                {
+                    PostId = Int32.Parse(post.Id),
+                    Title = post.Title,
+                    UserName = post.Author,
+                    Body = body,
+                    Link = link
+                };
+
+                Posts.Add(cPost);
             }
         }
-
-
     }
 }
