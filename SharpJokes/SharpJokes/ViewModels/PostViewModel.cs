@@ -9,7 +9,7 @@ using SharpJokes.Models;
 
 namespace SharpJokes.ViewModels
 {
-    public class PostViewModel
+    public class PostViewModel : INotifyPropertyChanged
     {
         // Event Handlers
         public event PropertyChangedEventHandler PropertyChanged;
