@@ -53,7 +53,8 @@
         <!--Side Panel-->
         <StackPanel Grid.Row="0" Grid.Column="0" Background="{StaticResource SystemControlBaseMediumLowAcrylicWindowMediumBrush}">
             <!--Search Bar-->
-            <TextBox ToolTipService.ToolTip="Search for a Post" x:Name="FilterTextbox" PlaceholderText="Search.." FontSize="20" Margin="20,20,20,20"/>
+            <TextBox ToolTipService.ToolTip="Search for a Post" x:Name="FilterTextbox" PlaceholderText="Search.." 
+                     Text="{x:Bind PViewModel.Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="20,20,20,20"/>
 
             <!--Filter presets-->
             <StackPanel Orientation="Horizontal" Margin="20,0,20,20" HorizontalAlignment="Center">
@@ -85,11 +86,12 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <Image Name="CurrentPostImage" Grid.Row="0" Grid.Column="0" Margin="20,20,20,20"></Image>
-            <TextBlock Name="CurrentPostTitle" Grid.Row="1" Grid.Column="0" FontWeight="Bold" Text="{x:Bind PLACEHOLDER.Title}" Margin="20,20,20,20"></TextBlock>
-            <TextBlock Name="CurrentPostUser" Grid.Row="2" Grid.Column="0" FontStyle="Italic" Text="{x:Bind PLACEHOLDER.User}" Margin="20,0,20,20"></TextBlock>
+            <Image Name="CurrentPostImage" x:FieldModifier="public" Grid.Row="0" Grid.Column="0" 
+                   Source="{x:Bind PViewModel.PostImg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,20,20,20" Width="250" Height="250"></Image>
+            <TextBlock Name="CurrentPostTitle" Grid.Row="1" Grid.Column="0" FontWeight="Bold" Text="{x:Bind PViewModel.PostTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,20,20,20"></TextBlock>
+            <TextBlock Name="CurrentPostUser" Grid.Row="2" Grid.Column="0" FontStyle="Italic" Text="{x:Bind PViewModel.PostUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,20,20"></TextBlock>
             <TextBlock Name="CurrentPostBody" Grid.Row="3" Grid.Column="0" Margin="20,0,20,20" 
-                       Text="{x:Bind PLACEHOLDER.Body}"></TextBlock>
+                       Text="{x:Bind PViewModel.PostBody, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
         </Grid>
 
     </Grid>
