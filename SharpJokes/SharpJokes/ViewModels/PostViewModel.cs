@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpJokes.Commands;
 using SharpJokes.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -39,6 +40,12 @@ namespace SharpJokes.ViewModels
         public string PostLink { get; set; }
         public BitmapImage PostImg = null;
 
+        // Commands
+        public FilterTopCommand FilterTopCommand { get; }
+        public FilterNewCommand FilterNewCommand { get; }
+        public FilterPopularCommand FilterPopularCommand { get; }
+        public FavoriteCommand FavoriteCommand { get; }
+
 
         // Selected Post field/property
         private PostModel _selectedPost;
@@ -71,6 +78,13 @@ namespace SharpJokes.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PostLink"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("_selectedPost"));
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PostImg"));
+
+                // Can executes
+                FilterTopCommand.FireCanExecuteChanged();
+                FilterNewCommand.FireCanExecuteChanged();
+                FilterPopularCommand.FireCanExecuteChanged();
+                FavoriteCommand.FireCanExecuteChanged();
+
             }
         }
 
@@ -104,6 +118,12 @@ namespace SharpJokes.ViewModels
 
             // clone dummy data into observable collection
             PerformFiltering();
+
+            // Create commands
+            FilterTopCommand = new FilterTopCommand(this);
+            FilterNewCommand = new FilterNewCommand(this);
+            FilterPopularCommand = new FilterPopularCommand(this);
+            FavoriteCommand = new FavoriteCommand(this);
 
         }
 

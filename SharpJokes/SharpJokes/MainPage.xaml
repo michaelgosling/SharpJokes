@@ -36,7 +36,7 @@
                 <AppBarButton x:Name="Exit" Label="Exit" Click="Exit_Click"></AppBarButton>
             </CommandBar.SecondaryCommands>
 
-            <AppBarButton Icon="OutlineStar" Label="Favorite Post" ToolTipService.ToolTip="Favorite Post"></AppBarButton>
+            <AppBarButton Icon="OutlineStar" Label="Favorite Post" ToolTipService.ToolTip="Favorite Post" Command="{x:Bind PViewModel.FavoriteCommand}"></AppBarButton>
             <AppBarButton x:Name="ViewFavorites" Icon="List" Label="View Favorites" ToolTipService.ToolTip="View Favorites" Click="ViewFavorites_Click"></AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
@@ -58,9 +58,9 @@
 
             <!--Filter presets-->
             <StackPanel Orientation="Horizontal" Margin="20,0,20,20" HorizontalAlignment="Center">
-                <AppBarButton x:Name="Top" Icon="Favorite" Label="Top"></AppBarButton>
-                <AppBarButton x:Name="Popular" Icon="Favorite" Label="Popular"></AppBarButton>
-                <AppBarButton x:Name="New"  Icon="Favorite" Label="New"></AppBarButton>
+                <AppBarButton x:Name="Top" Icon="Favorite" Label="Top" Command="{x:Bind PViewModel.FilterTopCommand}"></AppBarButton>
+                <AppBarButton x:Name="Popular" Icon="Favorite" Label="Popular" Command="{x:Bind PViewModel.FilterPopularCommand}"></AppBarButton>
+                <AppBarButton x:Name="New"  Icon="Favorite" Label="New" Command="{x:Bind PViewModel.FilterNewCommand}"></AppBarButton>
             </StackPanel>
 
             <!--List of Notes-->

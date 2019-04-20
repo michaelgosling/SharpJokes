@@ -122,6 +122,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\FavoriteCommand.cs" />
+    <Compile Include="Commands\FilterNewCommand.cs" />
+    <Compile Include="Commands\FilterPopularCommand.cs" />
+    <Compile Include="Commands\FilterTopCommand.cs" />
     <Compile Include="Constants\Global.cs" />
     <Compile Include="FavoritesPage.xaml.cs">
       <DependentUpon>FavoritesPage.xaml</DependentUpon>
