@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Reddit;
+using SharpJokes.Models;
 
 namespace SharpJokes
 {
@@ -18,23 +19,35 @@ namespace SharpJokes
 
         public static SortType PostSortType { get; set; } = SortType.Top;
 
-        // will replace this with our own post model and code that fills it
-        public static Reddit.Controllers.SubredditPosts Posts { get; } = sr.Posts;
+        public static List<PostModel> Posts { get; }
 
         public static void RefreshPosts()
         {
+            List<Reddit.Controllers.Post> posts = new List<Reddit.Controllers.Post>();
             switch (PostSortType)
             {
                 case SortType.Top:
-                    Posts.GetTop();
+                    sr.Posts.GetTop();
+                    posts = sr.Posts.Top;
                     break;
                 case SortType.Best:
-                    Posts.GetBest();
+                    sr.Posts.GetBest();
+                    posts = sr.Posts.Best;
                     break;
                 case SortType.New:
-                    Posts.GetNew();
+                    sr.Posts.GetNew();
+                    posts = sr.Posts.New;
                     break;
             }
+
+            Posts.Clear();
+
+            foreach (var post in posts)
+            {
+                
+            }
         }
+
+
     }
 }
