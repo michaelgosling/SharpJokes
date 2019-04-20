@@ -10,12 +10,12 @@ using Windows.UI.Xaml.Controls;
 
 namespace SharpJokes.Commands
 {
-    public class FavoriteCommand : ICommand {
+    public class ShowSelectedFavoriteCommand : ICommand {
         public event EventHandler CanExecuteChanged;
         public event PropertyChangedEventHandler PropertyChanged;
         private ViewModels.PostViewModel pvm;
 
-        public FavoriteCommand(ViewModels.PostViewModel pvm) {
+        public ShowSelectedFavoriteCommand(ViewModels.PostViewModel pvm) {
             this.pvm = pvm;
         }
 
@@ -24,7 +24,8 @@ namespace SharpJokes.Commands
         }
 
         public async void Execute(object parameter) {
-            MainPage mp = (Window.Current.Content as Frame).Content as MainPage;
+            SelectedFavoriteDialog sfd = new SelectedFavoriteDialog(pvm.PostTitle, pvm.PostBody, pvm.PostBody, pvm.PostLink);
+            ContentDialogResult result = await sfd.ShowAsync();
         }
 
         public void FireCanExecuteChanged() {

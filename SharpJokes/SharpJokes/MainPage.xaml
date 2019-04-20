@@ -75,24 +75,18 @@
 
         <!--Post Section-->
         <Grid Grid.Row="0" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/> <!--Image-->
-                <RowDefinition Height="auto"/> <!--Title-->
-                <RowDefinition Height="auto"/> <!--User-->
-                <RowDefinition Height="auto"/> <!--Post Body-->
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-
-            <Image Name="CurrentPostImage" x:FieldModifier="public" Grid.Row="0" Grid.Column="0" 
-                   Source="{x:Bind PViewModel.PostImg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,20,20,20" Width="250" Height="250"></Image>
-            <TextBlock Name="CurrentPostTitle" Grid.Row="1" Grid.Column="0" FontWeight="Bold" Text="{x:Bind PViewModel.PostTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,20,20,20"></TextBlock>
-            <TextBlock Name="CurrentPostUser" Grid.Row="2" Grid.Column="0" FontStyle="Italic" Text="{x:Bind PViewModel.PostUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,20,20"></TextBlock>
-            <TextBlock Name="CurrentPostBody" Grid.Row="3" Grid.Column="0" Margin="20,0,20,20" 
-                       Text="{x:Bind PViewModel.PostBody, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            <ScrollViewer>
+                <StackPanel>
+                    <Image Name="CurrentPostImage" x:FieldModifier="public" Source="{x:Bind PViewModel.PostImg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                           Margin="20,20,20,20" Width="250" Height="250"></Image>
+                    <TextBlock Name="CurrentPostTitle" FontWeight="Bold" Text="{x:Bind PViewModel.PostTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                               Margin="20,20,20,20"></TextBlock>
+                    <TextBlock Name="CurrentPostUser" FontStyle="Italic" Text="{x:Bind PViewModel.PostUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                               Margin="20,0,20,20"></TextBlock>
+                    <TextBlock Name="CurrentPostBody" Margin="20,0,20,20" Text="{x:Bind PViewModel.PostBody, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                               TextWrapping="Wrap"></TextBlock>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
-
     </Grid>
 </Page>

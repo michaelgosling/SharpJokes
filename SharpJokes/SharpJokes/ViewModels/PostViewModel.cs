@@ -45,6 +45,8 @@ namespace SharpJokes.ViewModels
         public FilterNewCommand FilterNewCommand { get; }
         public FilterPopularCommand FilterPopularCommand { get; }
         public FavoriteCommand FavoriteCommand { get; }
+        public DeleteFavoriteCommand DeleteFavoriteCommand { get; }
+        public ShowSelectedFavoriteCommand ShowSelectedFavoriteCommand { get; }
 
 
         // Selected Post field/property
@@ -84,6 +86,8 @@ namespace SharpJokes.ViewModels
                 FilterNewCommand.FireCanExecuteChanged();
                 FilterPopularCommand.FireCanExecuteChanged();
                 FavoriteCommand.FireCanExecuteChanged();
+                DeleteFavoriteCommand.FireCanExecuteChanged();
+                ShowSelectedFavoriteCommand.FireCanExecuteChanged();
 
             }
         }
@@ -124,6 +128,8 @@ namespace SharpJokes.ViewModels
             FilterNewCommand = new FilterNewCommand(this);
             FilterPopularCommand = new FilterPopularCommand(this);
             FavoriteCommand = new FavoriteCommand(this);
+            DeleteFavoriteCommand = new DeleteFavoriteCommand(this);
+            ShowSelectedFavoriteCommand = new ShowSelectedFavoriteCommand(this);
 
         }
 

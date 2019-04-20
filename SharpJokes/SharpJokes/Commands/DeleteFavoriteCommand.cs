@@ -10,12 +10,12 @@ using Windows.UI.Xaml.Controls;
 
 namespace SharpJokes.Commands
 {
-    public class FavoriteCommand : ICommand {
+    public class DeleteFavoriteCommand : ICommand {
         public event EventHandler CanExecuteChanged;
         public event PropertyChangedEventHandler PropertyChanged;
         private ViewModels.PostViewModel pvm;
 
-        public FavoriteCommand(ViewModels.PostViewModel pvm) {
+        public DeleteFavoriteCommand(ViewModels.PostViewModel pvm) {
             this.pvm = pvm;
         }
 
