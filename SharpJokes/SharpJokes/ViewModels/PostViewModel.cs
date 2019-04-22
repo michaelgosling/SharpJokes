@@ -136,6 +136,11 @@ namespace SharpJokes.ViewModels
             }
         }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public PostViewModel() { }
+
         public PostViewModel(bool isFavorites)
         {
             // create list and observable collection
