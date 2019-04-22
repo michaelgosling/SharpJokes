@@ -43,7 +43,7 @@
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Name="Exit" Label="Exit" Click="Exit_Click"></AppBarButton>
             </CommandBar.SecondaryCommands>
-
+            <AppBarButton x:Name="ViewFavorite" Icon="View" Label="View Favorite" ToolTipService.ToolTip="View Favorite" Command="{x:Bind PViewModel.ShowSelectedFavoriteCommand}"></AppBarButton>
             <AppBarButton x:Name="DeleteFavorite" Icon="Delete" Label="Delete Favorite" ToolTipService.ToolTip="Delete Favorite"></AppBarButton>
             <AppBarButton x:Name="Back" Icon="Back" Label="Back to App" ToolTipService.ToolTip="Back to App" Click="Back_Click"></AppBarButton>
         </CommandBar>

@@ -19,9 +19,12 @@ namespace SharpJokes {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class FavoritesPage : Page {
+    public sealed partial class FavoritesPage : Page 
+    {
+        public ViewModels.PostViewModel PViewModel { get; set; }
         public FavoritesPage() {
             this.InitializeComponent();
+            this.PViewModel = new ViewModels.PostViewModel();
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e) {
