@@ -20,7 +20,7 @@ namespace DBAccess
                 const string createTable =
                     "CREATE TABLE IF NOT EXISTS Favorites ( " +
                         "favorite_id nvarchar(255) PRIMARY KEY, " +
-                        "favorite_title nvarchar(255) NOT NULL DEFAULT('untitled'), " +
+                        "favorite_title nvarchar(255), " +
                         "favorite_text nvarchar(255), " +
                         "favorite_link nvarchar(255), " +
                         "favorite_username nvarchar(255) " +
@@ -98,16 +98,25 @@ namespace DBAccess
                 };
                 var result = selectAllCommand.ExecuteReader();
                 List<string[]> favorites = new List<string[]>();
-                do
+                if (result.HasRows)
                 {
-                    var favorite = new string[result.FieldCount];
-                    for (var i = 0; i < result.FieldCount; i++)
+                    do
                     {
-                        favorite[i] = result.GetString(i);
+                        var favorite = new string[result.FieldCount];
+                        for (var i = 0; i < result.FieldCount; i++)
+                        {
+                            favorite[i] = result.IsDBNull(i) ? null : result.GetString(i);
+                        }
+                        //favorite[0] = result.IsDBNull(0) ? null : result.GetString(0); // ID
+                        //favorite[1] = result.IsDBNull(1) ? null : result.GetString(1); // Title
+                        //favorite[2] = result.IsDBNull(2) ? null : result.GetString(2); // Body
+                        //favorite[3] = result.IsDBNull(3) ? null : result.GetString(3); // Link
+                        //favorite[4] = result.IsDBNull(4) ? null : result.GetString(4); // UserName
+
+                        favorites.Add(favorite);
                     }
-                    favorites.Add(favorite);
+                    while (result.Read());
                 }
-                while (result.Read());
 
                 return favorites;
             }
