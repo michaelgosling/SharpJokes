@@ -55,6 +55,17 @@ namespace DBAccess
             using (var db = new SqliteConnection("Filename=SharpJokesNew.db"))
             {
                 db.Open();
+
+                // check if this is already favorited, so we don't insert a duplicate row
+                var selectCommand = new SqliteCommand
+                {
+                    Connection = db,
+                    CommandText = "SELECT * FROM Favorites WHERE favorite_id = \"" + id + "\";"
+                };
+                var selectResult = selectCommand.ExecuteReader();
+                if (selectResult.HasRows) return;
+
+                // insert favorite
                 var insertCommand = new SqliteCommand
                 {
                     Connection = db,
