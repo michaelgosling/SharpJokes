@@ -14,7 +14,7 @@ namespace DBAccess
         /// </summary>
         public static void InitializeDatabase()
         {
-            using (var db = new SqliteConnection("Filename=SharpJokes.db"))
+            using (var db = new SqliteConnection("Filename=SharpJokesNew.db"))
             {
                 db.Open();
                 const string createTable =
