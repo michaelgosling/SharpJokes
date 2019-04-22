@@ -49,16 +49,16 @@ namespace SharpJokes
         /// </summary>
         public static void RefreshPosts()
         {
-            // create new Listing object for posts
-            Listing<RedditSharp.Things.Post> posts = null;
+            // create new  object for posts
+            IEnumerable<RedditSharp.Things.Post> posts = null;
 
             // fill listing dependent on the sort type
             if (PostSortType == SortType.Top)
-                posts = subreddit.GetTop(RedditSharp.Things.FromTime.All);
+                posts = subreddit.GetTop(RedditSharp.Things.FromTime.Week).Take(50);
             else if (PostSortType == SortType.New)
-                posts = subreddit.New;
+                posts = subreddit.New.Take(50);
             else if (PostSortType == SortType.Hot)
-                posts = subreddit.Hot;
+                posts = subreddit.Hot.Take(50);
 
             // clear the posts list
             Posts.Clear();
@@ -70,23 +70,24 @@ namespace SharpJokes
             // for each post, create a PostModel and add it to the Posts property
             foreach (var post in posts)
             {
-                
+
                 var body = "";
                 var link = "";
                 if (post.IsSelfPost)
                 {
                     link = null;
-                    body = post.SelfText;
-                } else
+                    body = post.SelfText.ToString();
+                }
+                else
                 {
-                    link = post.Url.ToString();
+                    link = post.Url.OriginalString.ToString();
                     body = null;
                 }
                 var cPost = new PostModel()
-                {
-                    PostId = Int32.Parse(post.Id),
+                { 
+                    PostId = post.Id,
                     Title = post.Title,
-                    UserName = post.Author.Name,
+                    UserName = post.AuthorName,
                     Body = body,
                     Link = link
                 };

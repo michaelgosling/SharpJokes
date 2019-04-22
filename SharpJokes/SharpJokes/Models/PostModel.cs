@@ -12,7 +12,7 @@ namespace SharpJokes.Models
         public string Body { get; set; }
         public string Link { get; set; }
         public string UserName { get; set; }
-        public int PostId { get; set; }
+        public string PostId { get; set; }
 
         /// <summary>
         /// Constructor with Properterties
@@ -22,7 +22,7 @@ namespace SharpJokes.Models
         /// <param name="link">Link of a link post</param>
         /// <param name="username">Username of poster</param>
         /// <param name="postID">Post ID</param>
-        public PostModel(string title, string body, string link, string username, int postID)
+        public PostModel(string title, string body, string link, string username, string postID)
         {
             Title = title;
             Body = body;

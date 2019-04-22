@@ -18,7 +18,7 @@ namespace SJUnitTests
             {
                 PostModel post = new PostModel()
                 {
-                    PostId = -1,
+                    PostId = "",
                     Title = "Test",
                     Body = "Test body",
                     Link = null,

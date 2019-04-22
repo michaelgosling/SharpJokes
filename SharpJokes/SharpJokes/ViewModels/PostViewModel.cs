@@ -27,6 +27,34 @@ namespace SharpJokes.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Posts"));
             }
         }
+        
+        // Sort Type Property
+        public string Sorting
+        {
+            get
+            {
+                string sorting = "";
+                switch (RedditController.PostSortType)
+                {
+                    case RedditController.SortType.Top:
+                        sorting = "Top";
+                        break;
+                    case RedditController.SortType.New:
+                        sorting = "New";
+                        break;
+                    case RedditController.SortType.Hot:
+                        sorting = "Popular";
+                        break;
+                }
+                return sorting;
+            }
+            set
+            {
+                if (value.Equals("New")) RedditController.PostSortType = RedditController.SortType.New;
+                else if (value.Equals("Popular")) RedditController.PostSortType = RedditController.SortType.Hot;
+                else if (value.Equals("Top")) RedditController.PostSortType = RedditController.SortType.Top;
+            }
+        }
 
         // list of allposts
         private List<PostModel> _allPosts;
@@ -35,7 +63,7 @@ namespace SharpJokes.ViewModels
         public string PostTitle { get; set; }
         public string PostBody { get; set; }
         public string PostUserName { get; set; }
-        public int PostId { get; set; }
+        public string PostId { get; set; }
         public string PostLink { get; set; }
         public BitmapImage PostImg = null;
 
@@ -54,7 +82,7 @@ namespace SharpJokes.ViewModels
                 PostTitle = value == null ? "" : value.Title;
                 PostBody = value == null ? "" : value.Body ?? "";
                 PostUserName = value == null ? "" : value.UserName;
-                PostId = value == null ? -1 : value.PostId;
+                PostId = value == null ? "" : value.PostId;
                 PostLink = value == null ? "" : value.Link ?? "";
 
                 // try to set the image of the post if there is one
@@ -96,15 +124,32 @@ namespace SharpJokes.ViewModels
             _observablePosts = new ObservableCollection<PostModel>();
             _allPosts = new List<PostModel>();
 
-            // some dummy data
-            for (var i = 0; i < 10; i++)
-            {
-                _allPosts.Add(new PostModel("Test" + i, "Test Body" + i, "https://i.redd.it/zo0c94gz6et21.png", "TestUser " + i, i));
-            }
+            // Initialize the API
+            RedditController.Init();
 
-            // clone dummy data into observable collection
+            // Get posts from the API
+            GetPostsFromAPI();
+
+            // clone data into observable collection
             PerformFiltering();
 
+        }
+
+
+        /// <summary>
+        /// Refresh API posts and fill the viewmodels list with them.
+        /// </summary>
+        private void GetPostsFromAPI()
+        {
+            // refresh api
+            RedditController.RefreshPosts();
+            // clear this list
+            _allPosts.Clear();
+            // fill this list
+            foreach (var post in RedditController.Posts)
+            {
+                _allPosts.Add(post);
+            }
         }
 
         /// <summary>
