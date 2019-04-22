@@ -11,7 +11,7 @@
     <AssemblyName>SharpJokes</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -122,6 +122,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\ShowSelectedFavorite.cs" />
+    <Compile Include="Commands\DeleteFavoriteCommand.cs" />
+    <Compile Include="Commands\FavoriteCommand.cs" />
+    <Compile Include="Commands\FilterNewCommand.cs" />
+    <Compile Include="Commands\FilterPopularCommand.cs" />
+    <Compile Include="Commands\FilterTopCommand.cs" />
     <Compile Include="Constants\Global.cs" />
     <Compile Include="FavoritesPage.xaml.cs">
       <DependentUpon>FavoritesPage.xaml</DependentUpon>
@@ -131,6 +137,9 @@
     </Compile>
     <Compile Include="Models\PostModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectedFavoriteDialog.xaml.cs">
+      <DependentUpon>SelectedFavoriteDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\PostViewModel.cs" />
     <Compile Include="RedditController.cs" />
   </ItemGroup>
@@ -166,6 +175,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SelectedFavoriteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
