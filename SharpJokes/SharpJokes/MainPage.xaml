@@ -51,36 +51,47 @@
         </Grid.ColumnDefinitions>
 
         <!--Side Panel-->
-        <StackPanel Grid.Row="0" Grid.Column="0" Background="{StaticResource SystemControlBaseMediumLowAcrylicWindowMediumBrush}">
-            <!--Search Bar-->
-            <TextBox ToolTipService.ToolTip="Search for a Post" x:Name="FilterTextbox" PlaceholderText="Search.." 
-                     Text="{x:Bind PViewModel.Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="20,20,20,20"/>
+        <Grid Grid.Row="0" Grid.Column="0" Background="{StaticResource SystemControlBaseMediumLowAcrylicWindowMediumBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Row="0">
+                <!--Search Bar-->
+                <TextBox ToolTipService.ToolTip="Search for a Post" x:Name="FilterTextbox" PlaceholderText="Search.." 
+                         Text="{x:Bind PViewModel.Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="20,20,20,20"/>
 
-            <!--Filter presets-->
-            <StackPanel Orientation="Horizontal" Margin="20,0,20,20" HorizontalAlignment="Center">
-                <AppBarButton x:Name="Top" Icon="Favorite" Label="Top" Command="{x:Bind PViewModel.FilterTopCommand}"></AppBarButton>
-                <AppBarButton x:Name="Popular" Icon="Favorite" Label="Popular" Command="{x:Bind PViewModel.FilterPopularCommand}"></AppBarButton>
-                <AppBarButton x:Name="New"  Icon="Favorite" Label="New" Command="{x:Bind PViewModel.FilterNewCommand}"></AppBarButton>
+                <!--Filter presets-->
+                <StackPanel Orientation="Horizontal" Margin="20,0,20,10" HorizontalAlignment="Center">
+                    <AppBarButton x:Name="Top" Icon="Favorite" Label="Top" Command="{x:Bind PViewModel.FilterTopCommand}"></AppBarButton>
+                    <AppBarButton x:Name="Popular" Icon="Favorite" Label="Popular" Command="{x:Bind PViewModel.FilterPopularCommand}"></AppBarButton>
+                    <AppBarButton x:Name="New"  Icon="Favorite" Label="New" Command="{x:Bind PViewModel.FilterNewCommand}"></AppBarButton>
+                </StackPanel>
             </StackPanel>
 
             <!--List of Notes-->
-            <ScrollViewer>
+            <ScrollViewer Grid.Row="1">
                 <ListView ToolTipService.ToolTip="Posts" VerticalAlignment="Top" Margin="20,20,20,20"
                     ItemsSource="{Binding Source={StaticResource PostCollection}}"
                     ItemTemplate="{Binding Source={StaticResource PostTemplate}}"
                     SelectedItem="{x:Bind PViewModel.SelectedPost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 </ListView>
             </ScrollViewer>
-        </StackPanel>
+            <!--</StackPanel>-->
+        </Grid>
 
         <!--Post Section-->
         <Grid Grid.Row="0" Grid.Column="1">
             <ScrollViewer>
                 <StackPanel>
                     <Image Name="CurrentPostImage" x:FieldModifier="public" Source="{x:Bind PViewModel.PostImg, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                           Margin="20,20,20,20" Width="250" Height="250"></Image>
+                           Margin="20,20,20,20" Width="400"  Height="400"></Image>
                     <TextBlock Name="CurrentPostTitle" FontWeight="Bold" Text="{x:Bind PViewModel.PostTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                               Margin="20,20,20,20"></TextBlock>
+                               Margin="20,20,20,0"></TextBlock>
                     <TextBlock Name="CurrentPostUser" FontStyle="Italic" Text="{x:Bind PViewModel.PostUserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                                Margin="20,0,20,20"></TextBlock>
                     <TextBlock Name="CurrentPostBody" Margin="20,0,20,20" Text="{x:Bind PViewModel.PostBody, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
