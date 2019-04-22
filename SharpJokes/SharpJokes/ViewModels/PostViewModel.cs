@@ -136,17 +136,23 @@ namespace SharpJokes.ViewModels
             }
         }
 
-        public PostViewModel()
+        public PostViewModel(bool isFavorites)
         {
             // create list and observable collection
             _observablePosts = new ObservableCollection<PostModel>();
             _allPosts = new List<PostModel>();
 
-            // Initialize the API
-            RedditController.Init();
+            if (!isFavorites)
+            {
+                // Initialize the API
+                RedditController.Init();
 
-            // Get posts from the API
-            GetPostsFromAPI();
+                // Get posts from the API
+                GetPostsFromAPI();
+            } else
+            {
+                GetFavorites();
+            }
 
             // clone data into observable collection
             PerformFiltering();
@@ -159,6 +165,28 @@ namespace SharpJokes.ViewModels
             DeleteFavoriteCommand = new DeleteFavoriteCommand(this);
             ShowSelectedFavoriteCommand = new ShowSelectedFavoriteCommand(this);
 
+        }
+
+        /// <summary>
+        /// Get favorites from the database and fill them into allposts
+        /// </summary>
+        public void GetFavorites()
+        {
+            // get list of string arrays
+            var favStrList = DBAccess.DB.GetFavorites();
+            // for each string array, create a post and add it to the list
+            foreach (var fav in favStrList)
+            {
+                var post = new PostModel()
+                {
+                    PostId = fav[0],
+                    Title = fav[1],
+                    Body = fav[2],
+                    Link = fav[3],
+                    UserName = fav[4]
+                };
+                _allPosts.Add(post);
+            }
         }
 
 
