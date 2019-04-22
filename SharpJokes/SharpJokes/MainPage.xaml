@@ -66,16 +66,16 @@
                          Text="{x:Bind PViewModel.Filter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Margin="20,20,20,20"/>
 
                 <!--Filter presets-->
-                <StackPanel Orientation="Horizontal" Margin="20,0,20,10" HorizontalAlignment="Center">
-                    <AppBarButton x:Name="Top" Icon="Favorite" Label="Top" Command="{x:Bind PViewModel.FilterTopCommand}"></AppBarButton>
-                    <AppBarButton x:Name="Popular" Icon="Favorite" Label="Popular" Command="{x:Bind PViewModel.FilterPopularCommand}"></AppBarButton>
-                    <AppBarButton x:Name="New"  Icon="Favorite" Label="New" Command="{x:Bind PViewModel.FilterNewCommand}"></AppBarButton>
+                <StackPanel Orientation="Horizontal" Margin="20,0,20,0" HorizontalAlignment="Center">
+                    <AppBarButton x:Name="Top" Icon="Up" Label="Top" Command="{x:Bind PViewModel.FilterTopCommand}"></AppBarButton>
+                    <AppBarButton x:Name="Popular" Icon="People" Label="Popular" Command="{x:Bind PViewModel.FilterPopularCommand}"></AppBarButton>
+                    <AppBarButton x:Name="New"  Icon="Priority" Label="New" Command="{x:Bind PViewModel.FilterNewCommand}"></AppBarButton>
                 </StackPanel>
             </StackPanel>
 
             <!--List of Notes-->
             <ScrollViewer Grid.Row="1">
-                <ListView ToolTipService.ToolTip="Posts" VerticalAlignment="Top" Margin="20,20,20,20"
+                <ListView ToolTipService.ToolTip="Posts" VerticalAlignment="Top" Margin="20,0,20,20"
                     ItemsSource="{Binding Source={StaticResource PostCollection}}"
                     ItemTemplate="{Binding Source={StaticResource PostTemplate}}"
                     SelectedItem="{x:Bind PViewModel.SelectedPost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">

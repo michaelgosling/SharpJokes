@@ -24,7 +24,8 @@ namespace SharpJokes.Commands
         }
 
         public async void Execute(object parameter) {
-            MainPage mp = (Window.Current.Content as Frame).Content as MainPage;
+            // Write the favorited post to the favorites DB
+            DBAccess.DB.AddFavorite(pvm.SelectedPost.PostId, pvm.SelectedPost.Title, pvm.SelectedPost.Body, pvm.SelectedPost.Link, pvm.SelectedPost.UserName);
         }
 
         public void FireCanExecuteChanged() {

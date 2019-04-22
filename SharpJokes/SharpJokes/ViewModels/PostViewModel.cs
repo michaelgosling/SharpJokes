@@ -165,7 +165,7 @@ namespace SharpJokes.ViewModels
         /// <summary>
         /// Refresh API posts and fill the viewmodels list with them.
         /// </summary>
-        private void GetPostsFromAPI()
+        public void GetPostsFromAPI()
         {
             // refresh api
             RedditController.RefreshPosts();

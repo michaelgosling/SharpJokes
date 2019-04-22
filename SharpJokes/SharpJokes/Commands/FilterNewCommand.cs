@@ -24,7 +24,10 @@ namespace SharpJokes.Commands
         }
 
         public async void Execute(object parameter) {
-            MainPage mp = (Window.Current.Content as Frame).Content as MainPage;
+            pvm.Sorting = "New";
+            pvm.GetPostsFromAPI();
+            pvm.Filter = "                                                                      ";
+            pvm.Filter = "";
         }
 
         public void FireCanExecuteChanged() {
