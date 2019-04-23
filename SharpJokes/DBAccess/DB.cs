@@ -83,6 +83,28 @@ namespace DBAccess
         }
 
         /// <summary>
+        /// Checks if a post has been favorited
+        /// </summary>
+        /// <param name="postId">Post ID</param>
+        /// <returns>Boolean indicating if post has been faved</returns>
+        public static bool CheckFavorite(string postId)
+        {
+            bool favorited = false;
+            using (var db = new SqliteConnection("Filename=SharpJokesNew.db"))
+            {
+                db.Open();
+                var selectCommand = new SqliteCommand
+                {
+                    Connection = db,
+                    CommandText = "SELECT favorite_id FROM Favorites WHERE favorite_id = \"" + postId + "\";"
+                };
+                var results = selectCommand.ExecuteReader();
+                if (results.HasRows) favorited = true;
+            }
+            return favorited;
+        }
+
+        /// <summary>
         /// Get the favorites from the database
         /// </summary>
         /// <returns>List of favorites (represented by string arrays)</returns>

@@ -68,6 +68,8 @@ namespace SharpJokes.ViewModels
         public string PostLink { get; set; }
         public BitmapImage PostImg = null;
 
+        public bool PostFavorited { get; set; }
+
         // Commands
         public FilterTopCommand FilterTopCommand { get; }
         public FilterNewCommand FilterNewCommand { get; }
@@ -93,6 +95,9 @@ namespace SharpJokes.ViewModels
                 PostUserName = value == null ? "" : value.UserName;
                 PostId = value == null ? "" : value.PostId;
                 PostLink = value == null ? "" : value.Link ?? "";
+
+                // determine if the post is favorited
+                PostFavorited = DBAccess.DB.CheckFavorite(value.PostId);
 
                 // try to set the image of the post if there is one
                 try {
