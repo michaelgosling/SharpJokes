@@ -10,7 +10,7 @@
 
     <Grid>
         <StackPanel Margin="50,100,0,0">
-            <TextBlock Text="About Programmer Humor" FontWeight="ExtraBold" FontSize="50"></TextBlock>
+            <TextBlock Text="About Sharp Jokes" FontWeight="ExtraBold" FontSize="50"></TextBlock>
             <TextBlock Margin="0,20,0,0" Text="{x:Bind Company}" FontSize="24"></TextBlock>
             <TextBlock Margin="0,20,0,0" Text="{x:Bind Version}" FontSize="24"></TextBlock>
             <TextBlock Margin="0,20,20,0" Text="{x:Bind Description}" FontSize="24" TextWrapping="Wrap"></TextBlock>

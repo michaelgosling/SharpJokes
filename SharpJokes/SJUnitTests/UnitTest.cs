@@ -119,7 +119,8 @@ namespace SJUnitTests
             Assert.IsTrue(DBAccess.DB.CheckFavorite(newFave.PostId));
         }
 
-        [TestMethod]        public void DBAccess_DeleteFavorite_Successful()
+        [TestMethod]
+        public void DBAccess_DeleteFavorite_Successful()
         {
             // create fave
             var newFave = new PostModel()
