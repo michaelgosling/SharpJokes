@@ -100,22 +100,14 @@ namespace DBAccess
                 List<string[]> favorites = new List<string[]>();
                 if (result.HasRows)
                 {
-                    do
+                    while(result.Read())
                     {
                         var favorite = new string[result.FieldCount];
                         for (var i = 0; i < result.FieldCount; i++)
-                        {
-                            favorite[i] = result.IsDBNull(i) ? null : result.GetString(i);
-                        }
-                        //favorite[0] = result.IsDBNull(0) ? null : result.GetString(0); // ID
-                        //favorite[1] = result.IsDBNull(1) ? null : result.GetString(1); // Title
-                        //favorite[2] = result.IsDBNull(2) ? null : result.GetString(2); // Body
-                        //favorite[3] = result.IsDBNull(3) ? null : result.GetString(3); // Link
-                        //favorite[4] = result.IsDBNull(4) ? null : result.GetString(4); // UserName
+                            if (!result.IsDBNull(i)) favorite[i] = result.GetString(i);
 
                         favorites.Add(favorite);
                     }
-                    while (result.Read());
                 }
 
                 return favorites;
