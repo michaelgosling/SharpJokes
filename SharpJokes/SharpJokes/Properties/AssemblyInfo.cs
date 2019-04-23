@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SharpJokes")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("This program uses the Reddit API to take data directly from the 'r/ProgrammerHumor' subreddit, and it uses its own database to store your favourite posts. Click on the link button below to go to the Programmer Humor Reddit page directly in your default browser.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Copyright © 2019 - Lee Griffiths, Michael Gosling, Ben Hartling")]
 [assembly: AssemblyProduct("SharpJokes")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
