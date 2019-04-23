@@ -11,8 +11,8 @@
     <Grid>
         <StackPanel Margin="50,100,0,0">
             <TextBlock Text="About Programmer Humor" FontWeight="ExtraBold" FontSize="50"></TextBlock>
-            <TextBlock Margin="0,20,0,0" Text="NAMES HERE" FontSize="24"></TextBlock>
-            <TextBlock Margin="0,20,20,0" Text="Paragraph here" FontSize="24" TextWrapping="Wrap"></TextBlock>
+            <TextBlock Margin="0,20,0,0" Text="©2019 Michael Gosling, Lee Griffiths, Ben Hartling &#x0a; v0.1" FontSize="24"></TextBlock>
+            <TextBlock Margin="0,20,20,0" Text="This program uses the Reddit API to take data directly from the 'r/ProgrammerHumor' subreddit, and it uses its own database to store your favourite posts. &#x0a; Click on the link button below to go to the Programmer Humor Reddit page directly in your default browser." FontSize="24" TextWrapping="Wrap"></TextBlock>
         </StackPanel>
     </Grid>
 
