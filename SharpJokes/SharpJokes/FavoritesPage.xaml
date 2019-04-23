@@ -23,7 +23,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid Background="{StaticResource SystemControlBaseMediumLowAcrylicWindowMediumBrush}">
+    <Grid Background="{StaticResource MyAcrylicBrushLight}">
         <StackPanel>
             <TextBlock Margin="50,50, 50, 0" Text="Favorites" FontWeight="ExtraBold" FontSize="50"></TextBlock>
             <!--List of Notes-->
