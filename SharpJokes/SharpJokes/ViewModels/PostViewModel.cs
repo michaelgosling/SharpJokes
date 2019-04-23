@@ -97,7 +97,8 @@ namespace SharpJokes.ViewModels
                 PostLink = value == null ? "" : value.Link ?? "";
 
                 // determine if the post is favorited
-                PostFavorited = DBAccess.DB.CheckFavorite(value.PostId);
+                if(value != null)
+                    PostFavorited = DBAccess.DB.CheckFavorite(value.PostId);
 
                 // try to set the image of the post if there is one
                 try {
@@ -219,7 +220,7 @@ namespace SharpJokes.ViewModels
         /// <summary>
         /// Filter search list
         /// </summary>
-        private void PerformFiltering()
+        public void PerformFiltering()
         {
             if (_filter == null) {
                 _filter = "";
