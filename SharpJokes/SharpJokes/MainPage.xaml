@@ -51,7 +51,7 @@
         </Grid.ColumnDefinitions>
 
         <!--Side Panel-->
-        <Grid Grid.Row="0" Grid.Column="0" Background="{StaticResource SystemControlBaseMediumLowAcrylicWindowMediumBrush}">
+        <Grid Grid.Row="0" Grid.Column="0" Background="{StaticResource MyAcrylicBrushLight}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="7*"/>

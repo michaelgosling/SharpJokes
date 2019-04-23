@@ -11,7 +11,7 @@
 
     <Page.Resources>
         <!--The list of posts data-->
-        <CollectionViewSource x:Name="FavoriteCollection">
+        <CollectionViewSource x:Name="FavoriteCollection" Source="{x:Bind PViewModel.Posts}">
         </CollectionViewSource>
 
         <!--The post item-->
@@ -23,15 +23,15 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid Background="{StaticResource SystemControlBaseMediumLowAcrylicWindowMediumBrush}">
+    <Grid Background="{StaticResource MyAcrylicBrushLight}">
         <StackPanel>
             <TextBlock Margin="50,50, 50, 0" Text="Favorites" FontWeight="ExtraBold" FontSize="50"></TextBlock>
             <!--List of Notes-->
             <ScrollViewer>
                 <GridView ToolTipService.ToolTip="Favorites" VerticalAlignment="Top" HorizontalAlignment="Center"
                     ItemsSource="{Binding Source={StaticResource FavoriteCollection}}"
-                    ItemTemplate="{Binding Source={StaticResource FavoriteTemplate}}">
-                    <!--SelectedItem="{x:Bind NDViewModel.SelectedNote, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+                    ItemTemplate="{Binding Source={StaticResource FavoriteTemplate}}"
+                    SelectedItem="{x:Bind PViewModel.SelectedPost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 </GridView>
             </ScrollViewer>
         </StackPanel>
@@ -44,7 +44,7 @@
                 <AppBarButton x:Name="Exit" Label="Exit" Click="Exit_Click"></AppBarButton>
             </CommandBar.SecondaryCommands>
             <AppBarButton x:Name="ViewFavorite" Icon="View" Label="View Favorite" ToolTipService.ToolTip="View Favorite" Command="{x:Bind PViewModel.ShowSelectedFavoriteCommand}"></AppBarButton>
-            <AppBarButton x:Name="DeleteFavorite" Icon="Delete" Label="Delete Favorite" ToolTipService.ToolTip="Delete Favorite"></AppBarButton>
+            <AppBarButton x:Name="DeleteFavorite" Icon="Delete" Label="Delete Favorite" ToolTipService.ToolTip="Delete Favorite" Command="{x:Bind PViewModel.DeleteFavoriteCommand}"></AppBarButton>
             <AppBarButton x:Name="Back" Icon="Back" Label="Back to App" ToolTipService.ToolTip="Back to App" Click="Back_Click"></AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>

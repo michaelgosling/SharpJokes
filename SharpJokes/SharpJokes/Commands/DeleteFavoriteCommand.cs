@@ -24,7 +24,19 @@ namespace SharpJokes.Commands
         }
 
         public async void Execute(object parameter) {
-            MainPage mp = (Window.Current.Content as Frame).Content as MainPage;
+            // Delete the Favorite
+            DBAccess.DB.DeleteFavorite(pvm.SelectedPost.PostId);
+            // Clean up left overs
+            pvm.SelectedPost = null;
+            pvm.PostId = null;
+            pvm.PostImg = null;
+            pvm.PostLink = null;
+            pvm.PostTitle = null;
+            pvm.PostBody = null;
+            pvm.PostUserName = null;
+            // Refresh posts
+            pvm.Posts = new System.Collections.ObjectModel.ObservableCollection<Models.PostModel>();
+            pvm.GetFavorites();
         }
 
         public void FireCanExecuteChanged() {

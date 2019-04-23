@@ -20,12 +20,16 @@ namespace SharpJokes.Commands
         }
 
         public bool CanExecute(object parameter) {
-            return pvm.SelectedPost != null;
+            return pvm.SelectedPost != null && !pvm.PostFavorited;
         }
 
         public async void Execute(object parameter) {
             // Write the favorited post to the favorites DB
             DBAccess.DB.AddFavorite(pvm.SelectedPost.PostId, pvm.SelectedPost.Title, pvm.SelectedPost.Body, pvm.SelectedPost.Link, pvm.SelectedPost.UserName);
+            // Set PostFavorited on the viewmodel to true
+            pvm.PostFavorited = true;
+            // Update can execute
+            FireCanExecuteChanged();
         }
 
         public void FireCanExecuteChanged() {

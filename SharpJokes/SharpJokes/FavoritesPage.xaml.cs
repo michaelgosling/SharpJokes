@@ -24,7 +24,7 @@ namespace SharpJokes {
         public ViewModels.PostViewModel PViewModel { get; set; }
         public FavoritesPage() {
             this.InitializeComponent();
-            this.PViewModel = new ViewModels.PostViewModel();
+            this.PViewModel = new ViewModels.PostViewModel(true);
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e) {

@@ -20,7 +20,7 @@ namespace DBAccess
                 const string createTable =
                     "CREATE TABLE IF NOT EXISTS Favorites ( " +
                         "favorite_id nvarchar(255) PRIMARY KEY, " +
-                        "favorite_title nvarchar(255) NOT NULL DEFAULT('untitled'), " +
+                        "favorite_title nvarchar(255), " +
                         "favorite_text nvarchar(255), " +
                         "favorite_link nvarchar(255), " +
                         "favorite_username nvarchar(255) " +
@@ -94,6 +94,28 @@ namespace DBAccess
         }
 
         /// <summary>
+        /// Checks if a post has been favorited
+        /// </summary>
+        /// <param name="postId">Post ID</param>
+        /// <returns>Boolean indicating if post has been faved</returns>
+        public static bool CheckFavorite(string postId)
+        {
+            bool favorited = false;
+            using (var db = new SqliteConnection("Filename=SharpJokesNew.db"))
+            {
+                db.Open();
+                var selectCommand = new SqliteCommand
+                {
+                    Connection = db,
+                    CommandText = "SELECT favorite_id FROM Favorites WHERE favorite_id = \"" + postId + "\";"
+                };
+                var results = selectCommand.ExecuteReader();
+                if (results.HasRows) favorited = true;
+            }
+            return favorited;
+        }
+
+        /// <summary>
         /// Get the favorites from the database
         /// </summary>
         /// <returns>List of favorites (represented by string arrays)</returns>
@@ -109,16 +131,17 @@ namespace DBAccess
                 };
                 var result = selectAllCommand.ExecuteReader();
                 List<string[]> favorites = new List<string[]>();
-                do
+                if (result.HasRows)
                 {
-                    var favorite = new string[result.FieldCount];
-                    for (var i = 0; i < result.FieldCount; i++)
+                    while(result.Read())
                     {
-                        favorite[i] = result.GetString(i);
+                        var favorite = new string[result.FieldCount];
+                        for (var i = 0; i < result.FieldCount; i++)
+                            if (!result.IsDBNull(i)) favorite[i] = result.GetString(i);
+
+                        favorites.Add(favorite);
                     }
-                    favorites.Add(favorite);
                 }
-                while (result.Read());
 
                 return favorites;
             }
