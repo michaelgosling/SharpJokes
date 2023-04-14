@@ -1,5 +1,7 @@
-# using Humor.Jokes.*;
-(WIP TITLE)
-_Michael Gosling, Lee Griffiths, Ben Hartling_
+# SharpJokes
+**By:** _Michael Gosling, Lee Griffiths, Ben Hartling_
 
 Windows Programming - NSCC 2019 - Final Project
+
+## Description
+Browse and favorite reddit posts from /r/ProgrammerHumor with a Windows UAP interface.
