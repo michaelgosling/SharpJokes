@@ -4,4 +4,4 @@
 Windows Programming - NSCC 2019 - Final Project
 
 ## Description
-Browse and favorite reddit posts from /r/ProgrammerHumor with a Windows UAP interface.
+Browse and favorite reddit posts from /r/ProgrammerHumor with a Windows UAP interface. Using sqlite3 for storage.
